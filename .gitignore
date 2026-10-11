@@ -1,0 +1,9 @@
+# Only the published site belongs in this repository; the repository is public.
+
+# Source material: original photos, publishers' PDFs (some not for distribution), drafts
+website-content/
+website-plan.md
+
+# Local tooling and system files
+.claude/
+.DS_Store

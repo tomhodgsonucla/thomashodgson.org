@@ -1,0 +1,308 @@
+/* thomashodgson.org — the one stylesheet for every page */
+
+/* Self-hosted, latin subset only. Licences (SIL OFL 1.1) are alongside in fonts/. */
+@font-face {
+  font-family: "Archivo Narrow";
+  src: url("fonts/ArchivoNarrow-latin.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "League Spartan";
+  src: url("fonts/LeagueSpartan-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --surface: #bcd5e4;
+  --text: rgba(0, 0, 0, 0.86);
+  --muted: rgba(0, 0, 0, 0.6);
+  --rule: rgba(0, 0, 0, 0.22);
+
+  --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Sitka Text", Cambria, Georgia, serif;
+  --name-font: "Archivo Narrow", "Arial Narrow", sans-serif;
+  --label-font: "League Spartan", "Helvetica Neue", Arial, sans-serif;
+
+  --measure: 34rem;
+  --page: 37rem;
+  --gutter: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Reserve the scrollbar's space even on short pages, so the name and menu don't shift between pages */
+  scrollbar-gutter: stable;
+  -webkit-text-size-adjust: 100%;
+  background: var(--surface);
+}
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 1.1875rem;
+  line-height: 1.6;
+  font-variant-numeric: oldstyle-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+}
+
+.skip-link:focus {
+  left: var(--gutter);
+  top: 0.5rem;
+  background: var(--surface);
+  padding: 0.25rem 0.5rem;
+}
+
+/* ---------- Shared layout ---------- */
+
+.site-header,
+main {
+  width: 100%;
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.site-header {
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+}
+
+.site-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--label-font);
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.site-nav a {
+  text-decoration: none;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.35em;
+}
+
+main {
+  padding-top: 2.5rem;
+  padding-bottom: 4rem;
+}
+
+/* ---------- Type ---------- */
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+.prose {
+  max-width: var(--measure);
+}
+
+.page-title {
+  margin: 0;
+  font-family: var(--name-font);
+  font-size: clamp(2rem, 1.3rem + 2.8vw, 3rem);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* On inner pages the name links home; it should still look like the name */
+.page-title a {
+  text-decoration: none;
+}
+
+.page-subtitle {
+  margin: 0.5rem 0 2.25rem;
+  font-family: var(--name-font);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.dateline {
+  margin-top: 2rem;
+  font-family: var(--label-font);
+  font-weight: 500;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+/* ---------- Sections and publication lists ---------- */
+
+.section-heading {
+  margin: 3rem 0 1.25rem;
+  font-family: var(--label-font);
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* The label face has no italic; titles in headings stay upright */
+.section-heading cite {
+  font-style: normal;
+}
+
+section:first-of-type .section-heading {
+  margin-top: 0;
+}
+
+/* Year hangs in a narrow column so titles line up */
+.pub-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pub-list li {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: 0 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.pub-list p {
+  margin: 0;
+}
+
+.pub-year,
+.pub-note {
+  font-family: var(--label-font);
+  font-weight: 500;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.pub-year {
+  padding-top: 0.3em;
+}
+
+.pub-note {
+  white-space: nowrap;
+  color: var(--muted);
+}
+
+/* ---------- Photos ---------- */
+
+/* All photos are cropped to 3:2; the first runs full width, the rest pair up */
+.photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin: 2rem 0 0;
+}
+
+.photo-grid img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.photo-grid img:first-child {
+  grid-column: 1 / -1;
+}
+
+.portrait {
+  max-width: 20rem;
+  margin: 2.5rem 0 0;
+}
+
+.portrait img {
+  width: 100%;
+}
+
+@media (max-width: 44rem) {
+  :root {
+    --gutter: 1rem;
+  }
+
+  body {
+    font-size: 1.0625rem;
+  }
+
+  main {
+    padding-top: 1.5rem;
+  }
+
+  /* Year above the entry rather than beside it, so entries keep a readable width */
+  .pub-list li {
+    grid-template-columns: 1fr;
+    margin-bottom: 1.25rem;
+  }
+
+  .pub-year {
+    padding-top: 0;
+  }
+
+  .site-nav ul {
+    gap: 0.25rem 0.9rem;
+    font-size: 0.8125rem;
+    letter-spacing: 0.06em;
+  }
+
+  @media (max-width: 24rem) {
+    .site-nav ul {
+      justify-content: space-between;
+      gap: 0.25rem 0.4rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.03em;
+    }
+  }
+}
